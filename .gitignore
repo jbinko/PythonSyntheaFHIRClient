@@ -128,8 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 #Ignore uploaded and error directories
-/uploaded
-/error
+./python_client/uploaded
+./python_client/error
 #Ignore vim swap files
-*.swp
+./python_client/*.swp
 
