@@ -1,6 +1,7 @@
 {
-	"connection_string":"",
-	"polling_interval":"",
-	"output_path":"",
-	"container_name":""
+	"connection_string":"<Storage Account connection string>",
+	"polling_interval":"<FHIR output path polling interval in seconds>",
+	"FHIR_output_path":"<FHIR output path>",
+	"local_output_path":"<Path for uploaded files>",
+	"container_name":"<Storage Account container name>"
 }
