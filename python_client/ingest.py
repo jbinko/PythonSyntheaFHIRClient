@@ -26,9 +26,9 @@ def process_uploaded(upload_result,target_path):
     uploaded_files = upload_result["uploaded"]
     error_files = upload_result["error"]
     output_upload_path = target_path+"/uploaded"
-    uploaded_exists = os.path.isfile(output_upload_path) 
+    uploaded_exists = os.path.exists(output_upload_path) 
     output_error_path = target_path+"/error"
-    error_exists = os.path.isfile(output_error_path)
+    error_exists = os.path.exists(output_error_path)
     if not uploaded_exists:
         os.mkdir(output_upload_path)
     if not error_exists:
