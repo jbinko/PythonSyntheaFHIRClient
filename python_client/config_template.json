@@ -2,6 +2,7 @@
 	"connection_string":"<Storage Account connection string>",
 	"polling_interval":"<FHIR output path polling interval in seconds>",
 	"FHIR_output_path":"<FHIR output path>",
-	"local_output_path":"<Path for uploaded files>",
+	"local_output_path":"<Optional putput path for uploaded files - Defaults to pwd>",
+	"log_path":"<Optional log output path - Defaults to std_out>",
 	"container_name":"<Storage Account container name>"
 }
