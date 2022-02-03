@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+
 import sys
 import os
 import uuid
@@ -17,7 +19,7 @@ class Config:
 		keys = self.config_map.keys()
 		for required_key in self.required_config_keys:
 			if not required_key in keys:
-				print("Missing configuration setting: "+required_key)
+				print("Missing configuration setting: "+required_key,flush=True)
 				configOK = False
 		return configOK
 	def get_config_map(self):
@@ -47,7 +49,7 @@ class FHIRUploader:
 				try:
 					file_to_upload = open(file_with_path,'r').read()
 					blob_client = self.blob_service_client.get_blob_client(container=self.container_name,blob=current_file)
-					print("Uploading "+current_file+" to blob account...")
+					print("Uploading "+current_file+" to blob account...",flush=True)
 					blob_client.upload_blob(file_to_upload)
 					results["uploaded"].append(file_with_path)
 				except Exception as ex:
@@ -57,7 +59,7 @@ class FHIRUploader:
 		return results
 	def run_upload_process(self):
 		while(True):
-			print("Checking path: "+self.FHIR_output_path+" for new files...")
+			print("Checking path: "+self.FHIR_output_path+" for new files...",flush=True)
 			upload_result = self.list_and_upload_new()
 			self.process_uploaded(upload_result,self.local_output_path)
 			time.sleep(self.polling_interval)
@@ -90,10 +92,13 @@ def main():
 	container_name = config_map["container_name"]
 	polling_interval = int(config_map["polling_interval"])
 	FHIR_output_path = config_map["FHIR_output_path"]
-	local_output_path = config_map["local_output_path"]
-	print("Config file loaded successfully.\n Polling interval: "+str(polling_interval)+"s\n")
-	if local_output_path == None or local_output_path == "":
-		local_output_path = os.path.dirname(os.path.realpath(__file__))
+	local_output_path = os.path.dirname(os.path.realpath(__file__))
+	if "local_output_path" in config_map:
+		local_output_path = config_map["local_output_path"]
+	if "log_path" in config_map:
+		log_out = open(config_map["log_path"],"w")
+		sys.stdout = log_out	
+	print("Config file loaded successfully.\n Polling interval: "+str(polling_interval)+"s\n",flush=True)
 	uploader = FHIRUploader(connection_string, container_name, polling_interval, FHIR_output_path,local_output_path)
 	blob_service_client = uploader.init_blob_connection()
 	uploader.set_blob_connection(blob_service_client)
