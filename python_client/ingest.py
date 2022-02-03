@@ -72,14 +72,11 @@ def main():
 	container_name = config_map["container_name"]
 	polling_interval = int(config_map["polling_interval"])
 	local_file_path = config_map["output_path"]
-	#local_file_path = "/home/vmadmin/synthea/output/fhir"
-	#"fhirimport"
-	#"DefaultEndpointsProtocol=https;AccountName=fhirimporterappsa;AccountKey=Jk9HyUdWiGpTm9jk6VSadWN6xfPQTZrLCFXpbng4mzSGfAXQX8LEMa9yODgyA8QGhlgLOSGrOalZqqxsxCLvcg==;EndpointSuffix=core.windows.net"
+	print("Config file loaded successfully.\n Polling interval: "+str(polling_interval)+"s\n")
 	# Create the BlobServiceClient object which will be used to create a container client
 	blob_service_client = BlobServiceClient.from_connection_string(connection_string)
 	# Create a unique name for the container
 	local_output_path = dir_path = os.path.dirname(os.path.realpath(__file__))
-	print(local_output_path)
 	while(True):
 		print("Checking path: "+local_file_path+" for new files...")
 		upload_result = list_and_upload_new(blob_service_client,container_name,local_file_path)
