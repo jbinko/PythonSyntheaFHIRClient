@@ -9,7 +9,6 @@ container_name=$6
 sudo apt update
 sudo apt upgrade -y
 sudo apt install python3-pip -y
-sudo pip install azure-storage-blob
 
 mkdir /home/synthea
 sudo chmod 777 /home/synthea/
@@ -23,4 +22,8 @@ content=$'{\n\"connection_string\":\"'"${connection_string}"$'\",\n\"polling_int
 
 echo "$content" > deploy_config.json
 
-sudo ./ingest.py deploy_config.json
+sudo mkdir fhir_out
+sudo mkdir out
+sudo mkdir out/uploaded
+sudo pip3 install azure-storage-blob
+#sudo ./ingest.py deploy_config.json
