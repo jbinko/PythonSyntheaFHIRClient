@@ -6,6 +6,8 @@ local_output_path=$4
 log_path=$5		
 container_name=$6		
 
+mkdir /home/synthea
+cd /home/synthea
 git clone https://github.com/jbinko/PythonSyntheaFHIRClient.git
 cd ./PythonSyntheaFHIRClient/python_client
 
