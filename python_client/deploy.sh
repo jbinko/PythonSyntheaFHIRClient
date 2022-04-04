@@ -18,7 +18,7 @@ cd ./PythonSyntheaFHIRClient/python_client
 
 echo "Writing config file..."
 
-content=$'{\n\"connection_string\":\"'"${connection_string}"$'\",\n\"polling_interval\":\"'"${polling_interval}"$'\",\n\"FHIR_output_path\":\"'"${FHIR_output_path}"$'\",\n\"local_output_path\":\"'"${local_output_path}"$'\",\n\"log_path\":\"'"${log_path}"$'\",\n\"container_name\":\"'"${container_name}"$'\"\n}' 
+content=$'{\n\"connection_string\":\"'"${connection_string}"'\",\n\"polling_interval\":\"'"${polling_interval}"'\",\n\"FHIR_output_path\":\"'"${FHIR_output_path}"'\",\n\"local_output_path\":\"'"${local_output_path}"'\",\n\"log_path\":\"'"${log_path}"'\",\n\"container_name\":\"'"${container_name}"'\"\n}' 
 
 echo "$content" > deploy_config.json
 
